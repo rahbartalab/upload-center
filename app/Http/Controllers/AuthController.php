@@ -11,8 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
-    public function login(LoginRequest $request, AuthenticationTokenHandler $tokenHandler): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
+        /** @var User $user */
+
         $validated = $request->validated();
         $user = User::query()->where('email', $validated['email'])->first();
 
@@ -22,7 +24,7 @@ class AuthController extends Controller
 
         return response()->json([
             'data' => [
-                'token' => $tokenHandler->generateToken($user)
+                'token' => $user->generateToken()
             ]
         ]);
     }
