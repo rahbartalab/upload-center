@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDiscountRequest;
+use App\Http\Requests\UpdateDiscountRequest;
 use App\Http\Resources\DiscountResource;
 use App\Models\Discount;
 use Illuminate\Http\JsonResponse;
@@ -33,5 +34,18 @@ class DiscountController extends Controller
         $discounts = Discount::all();
 
         return DiscountResource::collection($discounts);
+    }
+
+    public function update(UpdateDiscountRequest $request)
+    {
+        $validated = $request->validated();
+        $discount = Discount
+            ::query()
+            ->where('code', $validated['code'])
+            ->first();
+
+        $discount->update($validated);
+
+        return DiscountResource::make($discount);
     }
 }

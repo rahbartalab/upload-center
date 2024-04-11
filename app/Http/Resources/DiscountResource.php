@@ -18,9 +18,10 @@ class DiscountResource extends JsonResource
         $discount = $this->resource;
         return [
             'code' => $discount->code,
+            'price' => $discount->price,
+            'user' => UserResource::make($discount->user),
             'createdAt' => $this->dateFormat($discount->created_at),
             'expiredAt' => $this->dateFormat($discount->expired_at),
-            'user' => UserResource::make($discount->user)
         ];
     }
 
