@@ -13,6 +13,7 @@ Route
     ::prefix('discounts')
     ->name('discounts.')
     ->controller(DiscountController::class)
+    ->middleware('auth:sanctum')
     ->group(function () {
 
         Route::post('/', 'store')->name('store');
