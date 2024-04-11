@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDiscountRequest;
+use App\Http\Resources\DiscountResource;
 use App\Models\Discount;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Str;
 
 class DiscountController extends Controller
@@ -24,5 +26,12 @@ class DiscountController extends Controller
                 'code' => $discount->code
             ]
         ]);
+    }
+
+    public function index(): AnonymousResourceCollection
+    {
+        $discounts = Discount::all();
+
+        return DiscountResource::collection($discounts);
     }
 }

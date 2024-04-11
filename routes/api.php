@@ -11,11 +11,11 @@ Route::get('/user', function (Request $request) {
 
 Route
     ::prefix('discounts')
-    ->name('discounts')
+    ->name('discounts.')
     ->controller(DiscountController::class)
     ->group(function () {
 
-        Route::post('/', 'store');
-
+        Route::post('/', 'store')->name('store');
+        Route::get('/', 'index')->name('index');
 
     });
