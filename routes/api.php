@@ -9,20 +9,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route
-    ::prefix('discounts')
-    ->name('discounts.')
-    ->controller(DiscountController::class)
-    ->middleware('auth:sanctum')
-    ->group(function () {
-
-        Route::post('/', 'store')->name('store');
-        Route::get('/', 'index')->name('index');
-        Route::patch('/', 'update')->name('update');
-        Route::delete('/', 'destroy')->name('destroy');
-
-    });
-
-
+require_once __DIR__ . '/discounts.php';
+require_once __DIR__ . '/files.php';
 require_once __DIR__ . '/auth.php';
 
