@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreDiscountRequest;
+use App\Models\Discount;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class DiscountController extends Controller
+{
+    public function store(StoreDiscountRequest $request): JsonResponse
+    {
+        /** @var Discount $discount */
+
+        $discount = Discount
+            ::query()
+            ->create(array_merge($request->validated(), ['code' => Str::random(10)]));
+
+        return response()->json([
+            'message' => __('response.store_successfully'),
+            'data' => [
+                'code' => $discount->code
+            ]
+        ]);
+    }
+}
