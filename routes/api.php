@@ -19,6 +19,7 @@ Route
         Route::post('/', 'store')->name('store');
         Route::get('/', 'index')->name('index');
         Route::patch('/', 'update')->name('update');
+        Route::delete('/', 'destroy')->name('destroy');
 
     });
 

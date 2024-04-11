@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestroyDiscountRequest;
 use App\Http\Requests\StoreDiscountRequest;
 use App\Http\Requests\UpdateDiscountRequest;
 use App\Http\Resources\DiscountResource;
 use App\Models\Discount;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Response;
 
 class DiscountController extends Controller
 {
@@ -36,7 +38,7 @@ class DiscountController extends Controller
         return DiscountResource::collection($discounts);
     }
 
-    public function update(UpdateDiscountRequest $request)
+    public function update(UpdateDiscountRequest $request): DiscountResource
     {
         $validated = $request->validated();
         $discount = Discount
@@ -47,5 +49,16 @@ class DiscountController extends Controller
         $discount->update($validated);
 
         return DiscountResource::make($discount);
+    }
+
+    public function destroy(DestroyDiscountRequest $request): JsonResource
+    {
+        $validated = $request->validated();
+        Discount
+            ::query()
+            ->where('code', $validated['code'])
+            ->delete();
+
+        abort(Response::HTTP_NO_CONTENT);
     }
 }
