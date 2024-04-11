@@ -2,5 +2,6 @@
 
 
 return [
-    'store_successfully' => 'successfully stored'
+    'store_successfully' => 'successfully stored',
+    'unauthorized' => 'authorization failed'
 ];

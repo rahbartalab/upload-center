@@ -19,3 +19,6 @@ Route
         Route::get('/', 'index')->name('index');
 
     });
+
+
+require_once __DIR__ . '/auth.php';
