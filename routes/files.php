@@ -10,6 +10,8 @@ Route
     ->controller(FileController::class)
     ->group(function () {
 
+        Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
+        Route::delete('/', 'destroy')->name('destroy');
 
     });

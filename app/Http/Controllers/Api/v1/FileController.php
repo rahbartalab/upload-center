@@ -7,15 +7,21 @@ use App\Http\Requests\Api\v1\File\StoreFileRequest;
 use App\Http\Resources\FileResource;
 use App\Models\File;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class FileController extends Controller
 {
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
+        $files = File
+            ::query()
+            ->where('is_active', true)
+            ->get();
 
+        return FileResource::collection($files);
     }
 
     public function store(StoreFileRequest $request): JsonResponse
