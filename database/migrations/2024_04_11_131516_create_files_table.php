@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->string('slug');
             $table->string('name');
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(true);
             $table->text('path');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
