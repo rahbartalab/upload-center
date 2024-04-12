@@ -19,4 +19,9 @@ class File extends Model
         'is_active',
         'user_id',
     ];
+
+    public function getRealPath(): string
+    {
+        return substr($this->path, strpos($this->path, 'storage') + strlen('storage') + 1);
+    }
 }

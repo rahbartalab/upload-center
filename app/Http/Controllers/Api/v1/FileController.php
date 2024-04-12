@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\v1\File\DestroyFileRequest;
 use App\Http\Requests\Api\v1\File\StoreFileRequest;
 use App\Http\Resources\FileResource;
 use App\Models\File;
@@ -11,6 +12,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Response;
 
 class FileController extends Controller
 {
@@ -59,8 +61,17 @@ class FileController extends Controller
 
     }
 
-    public function destroy()
+    public function destroy(DestroyFileRequest $request): JsonResponse
     {
+        /** @var File $file */
 
+        $validated = $request->validated();
+        $file = File::query()->find($validated['file_id']);
+
+        Storage::disk('public')->delete($file->getRealPath());
+        $file->delete();
+
+        abort(Response::HTTP_NO_CONTENT);
     }
+
 }
