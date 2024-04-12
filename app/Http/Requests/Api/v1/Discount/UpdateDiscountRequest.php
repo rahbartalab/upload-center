@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api\v1\Discount;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class UpdateDiscountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,9 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email', 'exists:users'],
-            'password' => ['required', 'string', 'min:6']
+            'code' => ['required', 'string', 'exists:discounts'],
+            'price' => ['required', 'integer', 'max:100000'],
+            'expired_at' => ['required', 'date', 'after:' . now()]
         ];
     }
 }

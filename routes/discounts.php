@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\Api\v1\DiscountController;
 use Illuminate\Support\Facades\Route;
 
 Route

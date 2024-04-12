@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Requests\LoginRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\v1\Auth\LoginRequest;
 use App\Models\User;
-use App\Services\AuthenticationTokenHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;

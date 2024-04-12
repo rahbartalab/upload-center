@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class FileController extends Controller
 {
@@ -13,7 +13,7 @@ class FileController extends Controller
 
     public function store()
     {
-        
+
     }
 
     public function show()
